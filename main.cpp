@@ -3,7 +3,9 @@
 int main()
 {
 
-    
+    Parquing P;
+
+    cout << P.getTiempo() << endl;
 
 
     return 0;

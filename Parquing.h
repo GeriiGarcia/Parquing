@@ -3,13 +3,15 @@
 class Parquing
 {
 public:
-    Parquing(vector<Plazas> p, time_t t);
+    Parquing();
+    time_t getTiempo() {return tiempo;}
     
 
 private:
     vector<Plazas> plazas[1000];
-    time_t time;    
+    time_t tiempo;   
 
 };
+
 
 
