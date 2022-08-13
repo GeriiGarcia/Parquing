@@ -27,14 +27,6 @@ Parquing::Parquing()
     
 }
 
-bool operator == (TipoP p, TipoV v)
-{
-    if((p == TurismoP && v == Turismo) || (p == MotoP && v == Moto) || (p== VFNP && v==VFN) || (p == VGP && v ==VG) || (p == RPP && v == RP))
-        return true;
-    else 
-        return false;
-}
-
 void Parquing::ocuparPlaza(TipoV ve, string mat)
 {
     bool encontrado = false;
@@ -43,13 +35,24 @@ void Parquing::ocuparPlaza(TipoV ve, string mat)
 
     while (encontrado == false)
     {
-        if(ve == plazas->at(i).getTipoP() && plazas->at(i).getVehiculo().getMatricula()=="")
+        if(plazas->at(i).esIgual(ve) == true)
         {
-            encontrado==true;
-            Vehiculo v(mat,ve);
-            plazas->at(i).setVehiculo(v);
+            if(plazas->at(i).getVehiculo().getMatricula()=="")
+            {
+                encontrado = true;
+                Vehiculo v(mat,ve);
+                plazas->at(i).setVehiculo(v);
+                
+                //actualizamos el tiempo
+                setTime();
+                plazas->at(i).setTiempo(tiempo);
+            }
+            else
+            {
+                
+            }
         }
+        i++;
     }
     
-   
 }

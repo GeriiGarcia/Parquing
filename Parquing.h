@@ -17,7 +17,6 @@ private:
 
 };
 
- bool operator == (TipoP p, TipoV v);
-
+ 
 
 

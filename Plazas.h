@@ -24,6 +24,14 @@ public:
     Vehiculo getVehiculo() {return ve;}
     TipoP getTipoP() {return tipo;}
 
+    bool esIgual(const TipoV &v)
+    {
+        if((tipo == TurismoP && v == Turismo) || (tipo == MotoP && v == Moto) || (tipo == VFNP && v==VFN) || (tipo == VGP && v ==VG) || (tipo == RPP && v == RP))
+            return true;
+        else 
+            return false;
+    }
+
 private:
     Vehiculo ve;
     TipoP tipo;
