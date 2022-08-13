@@ -6,6 +6,7 @@ int main()
     Parquing P;
 
     cout << P.getTiempo() << endl;
+    cout << P.getPlaza(999).getTipoP() << endl;
 
 
     return 0;

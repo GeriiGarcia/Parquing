@@ -14,11 +14,12 @@ class Plazas
 {
 
 public:
-    Plazas(Vehiculo v, TipoP t);
-    /* ~Plazas();*/
+    Plazas();
+    Plazas(Vehiculo v, TipoP t) {ve = v; tipo = t;};
+    
 
     void setVehiculo(Vehiculo v) {ve = v;}
-    void setTipo(TipoP t) {tipo = t;}
+    void setTipoP(TipoP t) {tipo = t;}
 
     Vehiculo getVehiculo() {return ve;}
     TipoP getTipoP() {return tipo;}

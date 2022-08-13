@@ -5,6 +5,9 @@ class Parquing
 public:
     Parquing();
     time_t getTiempo() {return tiempo;}
+
+    Plazas getPlaza(int num) {return plazas->at(num);}
+    void ocuparPlaza();
     
 
 private:
