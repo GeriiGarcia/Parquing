@@ -19,7 +19,7 @@ enum TipoV
 class Vehiculo
 {
 public:
-    Vehiculo(string m, TipoV t);
+    Vehiculo(string m, TipoV t) {matricula = m; tipo = t;};
     Vehiculo() {matricula=""; tipo=Vacio;};
 
     string getMatricula() {return matricula;}

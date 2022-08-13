@@ -1,14 +1,21 @@
 #include "Parquing.h"
-
+#include "unistd.h"
 int main()
 {
 
     Parquing P;
 
+    int hola = P.getTiempo();
+    
+
     cout << P.getTiempo() << endl;
-    cout << P.getPlaza(999).getTipoP() << endl;
 
+    sleep(2);
+    P.setTime();
+    cout << P.getTiempo() << endl;
+    cout << hola<< endl;
 
+    
     return 0;
 }
 
