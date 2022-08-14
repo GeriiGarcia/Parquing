@@ -27,11 +27,11 @@ Parquing::Parquing()
     
 }
 
-void Parquing::ocuparPlaza(TipoV ve, string mat)
+bool Parquing::ocuparPlaza(TipoV ve, string mat)
 {
     bool encontrado = false;
     
-    int i =0;
+    int i = 0;
 
     while (encontrado == false)
     {
@@ -39,20 +39,36 @@ void Parquing::ocuparPlaza(TipoV ve, string mat)
         {
             if(plazas->at(i).getVehiculo().getMatricula()=="")
             {
+                //ocupamos la plaza
                 encontrado = true;
                 Vehiculo v(mat,ve);
                 plazas->at(i).setVehiculo(v);
-                
-                //actualizamos el tiempo
+
+                //actualizamos el tiempo y se lo asignamos a la plaza
                 setTime();
                 plazas->at(i).setTiempo(tiempo);
-            }
-            else
-            {
-                
             }
         }
         i++;
     }
-    
+    return encontrado;   
+}
+
+
+bool Parquing::desocuparPlaza(string mat)
+{
+    bool desocupado = false;
+    int i=0;
+
+    while (desocupado == false)
+    {
+        if(plazas->at(i).getVehiculo().getMatricula() == mat)
+        {
+            desocupado = true;
+            
+        }
+    }
+
+
+    return desocupado;
 }

@@ -7,8 +7,9 @@ public:
     time_t getTiempo() {return tiempo;}
 
     Plazas getPlaza(int num) {return plazas->at(num);}
-    void ocuparPlaza(TipoV ve, string mat);
+    bool ocuparPlaza(TipoV ve, string mat);
     void setTime() {tiempo = time(NULL);}
+    bool desocuparPlaza(string mat);
    
 
 private:

@@ -26,7 +26,7 @@ public:
 
     bool esIgual(const TipoV &v)
     {
-        if((tipo == TurismoP && v == Turismo) || (tipo == MotoP && v == Moto) || (tipo == VFNP && v==VFN) || (tipo == VGP && v ==VG) || (tipo == RPP && v == RP))
+        if((tipo == TurismoP && v == Turismo) || (tipo == MotoP && v == Moto) || (tipo == VFNP && v==VFN) || (tipo == VGP && v ==VG) || (tipo == RPP && v == RP) || (tipo == TurismoP && v == VFN))
             return true;
         else 
             return false;
