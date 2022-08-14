@@ -20,6 +20,36 @@ TipoV intoV(int o)
     return Vacio;
 }
 
+bool matriculaReal(string m)
+{
+    bool real = false;
+
+    string n = m;
+    n.pop_back();
+    n.pop_back();
+    n.pop_back();
+
+    string l;
+    char c = m.back();
+    char b = m.back();
+    char a = m.back();
+
+    l.push_back(a);
+    l.push_back(b);
+    l.push_back(c);
+
+    if(m.size() == 7)
+    {
+        if(isdigit(n.at(0)) && isdigit(n.at(1)) && isdigit(n.at(2)) && isdigit(n.at(3)) && !isdigit(c) && !isdigit(b) && !isdigit(a))
+            real = true;
+    }
+
+    if(real == false)
+        cout << "Matricula no Válida." << endl;
+
+    return real;
+}
+
 
 int main()
 {
@@ -28,17 +58,6 @@ int main()
     int opcion;
     string matric;
     int tiempoTotal = 0;
-
-    /*
-    int hola = P.getTiempo();
-    
-
-    cout << P.getTiempo() << endl;
-
-    sleep(2);
-    P.setTime();
-    cout << P.getTiempo() << endl;
-    cout << hola<< endl;  */
 
     do
     {
@@ -53,10 +72,9 @@ int main()
             cin >>opcion;
         }
 
-
         switch(opcion)
         {
-        case 1:
+        case 1:    //podria poner cuantas plazas quedaan para cada vehiculo
             cout << "¿Qué tipo de coche eres?" << endl << "1- Turismo" << endl << "2- Motocicleta" << endl;
             cout << "3- Vehiculo Familia Numerosa" << endl << "4- Vehiculo Grande" << endl << "5- Reservado a Personal" << endl;
 
@@ -76,8 +94,13 @@ int main()
             }
             else
             {
-                cout << "Perfecto, introduce tu matricula: ";
-                cin >> matric;
+                cout << "Perfecto, introduce tu matricula: "; 
+
+                do
+                {
+                    cin >> matric;
+                } while (!matriculaReal(matric));
+                
                 if(P.ocuparPlaza(intoV(opcionVehiculo),matric))
                     cout << "Hay plazas para ti, adelante." << endl;
                 else
@@ -88,10 +111,17 @@ int main()
 
         case 2:
             cout << "Perfecto, introduce tu matricula: ";
-            cin >> matric;
+            
+            do
+            {
+                cin >> matric;
+            } while (!matriculaReal(matric));
 
-            if(P.desocuparPlaza(matric, tiempoTotal))
+            if(P.desocuparPlaza(matric, tiempoTotal)) // hacer que pague el puto con funcion que imprima lo que tiene que pagar         void pago(int tiempo);
+            {
+                cout << tiempoTotal << endl;
                 cout << "Muchas gracias por confiar en nosotros, hasta pronto." << endl;
+            }
             else
                 cout << "Parece que la matricula que has introducido no coincide con ninguna registrada, intentelo de nuevo: ";
 

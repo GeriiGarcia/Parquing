@@ -60,7 +60,7 @@ bool Parquing::desocuparPlaza(string mat, int &tiempoTotal)
     bool desocupado = false;
     int i=0;
 
-    while (desocupado == false)
+    while (desocupado == false && i<999)
     {
         if(plazas->at(i).getVehiculo().getMatricula() == mat)
         {
