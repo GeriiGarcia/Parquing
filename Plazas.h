@@ -14,15 +14,16 @@ class Plazas
 {
 
 public:
-    Plazas();
+    Plazas() {tiempoEntrada = 0;};
     Plazas(Vehiculo v, TipoP t) {ve = v; tipo = t;};
     
     void setVehiculo(Vehiculo v) {ve = v;}
     void setTipoP(TipoP t) {tipo = t;}
-    void setTiempo(time_t t) {tiempo = t;}
+    void setTiempo(time_t t) {tiempoEntrada = t;}
 
     Vehiculo getVehiculo() {return ve;}
     TipoP getTipoP() {return tipo;}
+    int getTiempoP() {return tiempoEntrada;}
 
     bool esIgual(const TipoV &v)
     {
@@ -35,7 +36,7 @@ public:
 private:
     Vehiculo ve;
     TipoP tipo;
-    int tiempo;
+    int tiempoEntrada;
 };
 
 

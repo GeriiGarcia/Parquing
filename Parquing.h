@@ -9,7 +9,7 @@ public:
     Plazas getPlaza(int num) {return plazas->at(num);}
     bool ocuparPlaza(TipoV ve, string mat);
     void setTime() {tiempo = time(NULL);}
-    bool desocuparPlaza(string mat);
+    bool desocuparPlaza(string mat, int &tiempoTotal);
    
 
 private:

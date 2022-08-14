@@ -55,7 +55,7 @@ bool Parquing::ocuparPlaza(TipoV ve, string mat)
 }
 
 
-bool Parquing::desocuparPlaza(string mat)
+bool Parquing::desocuparPlaza(string mat, int &tiempoTotal)
 {
     bool desocupado = false;
     int i=0;
@@ -64,11 +64,19 @@ bool Parquing::desocuparPlaza(string mat)
     {
         if(plazas->at(i).getVehiculo().getMatricula() == mat)
         {
+            //desocupamos plaza
             desocupado = true;
+            plazas->at(i).getVehiculo().setMatricula("");
+            plazas->at(i).getVehiculo().setTipoV(Vacio);
+
+            //cogemos el tiempo actual y se lo restamos al tiempo de entrada de la plaza y lo devolvemos por referencia
+            time_t salida = time(NULL);
+            setTime();
+            tiempoTotal = salida - plazas->at(i).getTiempoP();
             
         }
+        i++;
     }
-
 
     return desocupado;
 }

@@ -1,10 +1,35 @@
 #include "Parquing.h"
 #include "unistd.h"
+
+TipoV intoV(int o)
+{
+    switch (o)
+    {
+    case 1:
+        return Turismo;
+        break;
+    case 2: return Moto;
+        break;
+    case 3: return VFN;
+        break;
+    case 4: return VG;
+        break;
+    case 5: return RP;
+        break;
+    }
+    return Vacio;
+}
+
+
 int main()
 {
 
     Parquing P;
+    int opcion;
+    string matric;
+    int tiempoTotal = 0;
 
+    /*
     int hola = P.getTiempo();
     
 
@@ -13,9 +38,73 @@ int main()
     sleep(2);
     P.setTime();
     cout << P.getTiempo() << endl;
-    cout << hola<< endl;
+    cout << hola<< endl;  */
 
+    do
+    {
+        cout << "Hola, Bienvenido al Parquing de Gerard, que quieres hacer?" << endl;
+        cout << "1- Entrar al parquing" << endl << "2- Salir del parquing"<<endl << "3- Exit" << endl;
+
+        cin >> opcion;
+
+        while (opcion != 1 && opcion !=2 && opcion !=3)
+        {
+            cout << "Opcion no valida" << endl;
+            cin >>opcion;
+        }
+
+
+        switch(opcion)
+        {
+        case 1:
+            cout << "¿Qué tipo de coche eres?" << endl << "1- Turismo" << endl << "2- Motocicleta" << endl;
+            cout << "3- Vehiculo Familia Numerosa" << endl << "4- Vehiculo Grande" << endl << "5- Reservado a Personal" << endl;
+
+            int opcionVehiculo;
+
+            cin >> opcionVehiculo;
+
+            while (opcionVehiculo != 1 && opcionVehiculo !=2 && opcionVehiculo !=3 && opcionVehiculo !=4 && opcionVehiculo != 5)
+            {
+                cout << "Opcion no valida" << endl;
+                cin >>opcionVehiculo;
+            }
+
+            if(opcionVehiculo == 5)
+            {
+                //poner codigo   
+            }
+            else
+            {
+                cout << "Perfecto, introduce tu matricula: ";
+                cin >> matric;
+                if(P.ocuparPlaza(intoV(opcionVehiculo),matric))
+                    cout << "Hay plazas para ti, adelante." << endl;
+                else
+                    cout << "No quedan plazas para ti, intentelo de nuevo mas tarde. Gracias." <<endl;
+            }
+
+            break;
+
+        case 2:
+            cout << "Perfecto, introduce tu matricula: ";
+            cin >> matric;
+
+            if(P.desocuparPlaza(matric, tiempoTotal))
+                cout << "Muchas gracias por confiar en nosotros, hasta pronto." << endl;
+            else
+                cout << "Parece que la matricula que has introducido no coincide con ninguna registrada, intentelo de nuevo: ";
+
+            break;
+
+        }
+
+    } while (opcion !=3);
     
+
+
+
+
     return 0;
 }
 
