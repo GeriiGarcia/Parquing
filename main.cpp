@@ -1,5 +1,36 @@
 #include "Parquing.h"
-#include "unistd.h"
+
+string capitalizeString(string s)
+{
+    transform(s.begin(), s.end(), s.begin(),
+                   [](unsigned char c){ return toupper(c); });
+    return s;
+}
+
+bool matriculaReal(string m)
+{
+    bool real = false;
+
+    string n = m;
+    n.pop_back();
+    n.pop_back();
+    n.pop_back();
+
+    char c = m.back();
+    char b = m.back();
+    char a = m.back();
+
+    if(m.size() == 7)
+    {
+        if(isdigit(n.at(0)) && isdigit(n.at(1)) && isdigit(n.at(2)) && isdigit(n.at(3)) && !isdigit(c) && !isdigit(b) && !isdigit(a))
+            real = true;
+    }
+
+    if(real == false)
+        cout << "Matricula no Válida." << endl;
+
+    return real;
+}
 
 TipoV intoV(int o)
 {
@@ -20,36 +51,17 @@ TipoV intoV(int o)
     return Vacio;
 }
 
-bool matriculaReal(string m)
+void pago(int tiempo)
 {
-    bool real = false;
+    int deuda = 1;
 
-    string n = m;
-    n.pop_back();
-    n.pop_back();
-    n.pop_back();
+    tiempo = tiempo / 3600;
 
-    string l;
-    char c = m.back();
-    char b = m.back();
-    char a = m.back();
+    deuda = deuda + 0.5 * tiempo;
 
-    l.push_back(a);
-    l.push_back(b);
-    l.push_back(c);
-
-    if(m.size() == 7)
-    {
-        if(isdigit(n.at(0)) && isdigit(n.at(1)) && isdigit(n.at(2)) && isdigit(n.at(3)) && !isdigit(c) && !isdigit(b) && !isdigit(a))
-            real = true;
-    }
-
-    if(real == false)
-        cout << "Matricula no Válida." << endl;
-
-    return real;
+    cout << "Total ha pagar: " << deuda << "." << endl;
+    
 }
-
 
 int main()
 {
@@ -66,7 +78,7 @@ int main()
 
         cin >> opcion;
 
-        while (opcion != 1 && opcion !=2 && opcion !=3)
+        while (opcion != 1 && opcion !=2 && opcion !=3 && opcion !=4)
         {
             cout << "Opcion no valida" << endl;
             cin >>opcion;
@@ -74,7 +86,7 @@ int main()
 
         switch(opcion)
         {
-        case 1:    //podria poner cuantas plazas quedaan para cada vehiculo
+        case 1:    //podria poner cuantas plazas quedaan para cada vehiculo                        void plazasLires(vector plazas);
             cout << "¿Qué tipo de coche eres?" << endl << "1- Turismo" << endl << "2- Motocicleta" << endl;
             cout << "3- Vehiculo Familia Numerosa" << endl << "4- Vehiculo Grande" << endl << "5- Reservado a Personal" << endl;
 
@@ -90,7 +102,15 @@ int main()
 
             if(opcionVehiculo == 5)
             {
-                //poner codigo   
+                cout <<  "Introduce tu codigo de personal: ";
+                cin >> matric;
+
+                //Implementar codigo
+                //hacer funcion que ocupe el espacio de esto      bool personal()
+                //a partir de la matricula, comprovar si la matricula esta en el array de strings
+                //si esta le dejo pasar y devuelve true, si no esta pedir matricula otra vez
+
+
             }
             else
             {
@@ -100,6 +120,8 @@ int main()
                 {
                     cin >> matric;
                 } while (!matriculaReal(matric));
+
+                matric= capitalizeString(matric);
                 
                 if(P.ocuparPlaza(intoV(opcionVehiculo),matric))
                     cout << "Hay plazas para ti, adelante." << endl;
@@ -117,13 +139,21 @@ int main()
                 cin >> matric;
             } while (!matriculaReal(matric));
 
-            if(P.desocuparPlaza(matric, tiempoTotal)) // hacer que pague el puto con funcion que imprima lo que tiene que pagar         void pago(int tiempo);
+            matric= capitalizeString(matric);
+
+            if(P.desocuparPlaza(matric, tiempoTotal)) 
             {
                 cout << tiempoTotal << endl;
-                cout << "Muchas gracias por confiar en nosotros, hasta pronto." << endl;
+                pago(tiempoTotal);
+                cout << "Muchas gracias por confiar en nosotros, hasta pronto." << endl << endl;
             }
             else
                 cout << "Parece que la matricula que has introducido no coincide con ninguna registrada, intentelo de nuevo: ";
+
+            break;
+
+        case 4:
+            P.anadirQuitarPersonal();
 
             break;
 
@@ -131,10 +161,6 @@ int main()
 
     } while (opcion !=3);
     
-
-
-
-
     return 0;
 }
 

@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string>
+#include <algorithm>
+#include "unistd.h"
 
 using namespace std;
 

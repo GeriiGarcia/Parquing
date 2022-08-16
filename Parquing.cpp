@@ -1,5 +1,8 @@
 #include "Parquing.h"
 
+string capitalizeString(string s);
+bool matriculaReal(string m);
+
 Parquing::Parquing()
 {
     tiempo = time(NULL);
@@ -24,6 +27,40 @@ Parquing::Parquing()
         else
             plazas->at(i).setTipoP(RPP);
     }
+
+    for (int i = 0; i < 50; i++)
+    {
+        matriculasPersonal[i] = "123";
+    }
+    
+
+    int l = 65;
+    char a = l;
+    for (int i = 0; i < 50; i++)
+    {
+        if(i<25)
+        {
+            a=l;
+            matriculasPersonal[i].push_back('4');
+            matriculasPersonal[i].push_back(a);
+            matriculasPersonal[i].push_back(a);
+            matriculasPersonal[i].push_back(a);
+            l++;
+        }
+        else
+        {
+            a=l;
+            if(i==25)
+                l =65;
+            matriculasPersonal[i].push_back('5');
+            matriculasPersonal[i].push_back(a);
+            matriculasPersonal[i].push_back(a);
+            matriculasPersonal[i].push_back(a);
+            l++;
+        }
+            
+    }
+    
     
 }
 
@@ -79,4 +116,58 @@ bool Parquing::desocuparPlaza(string mat, int &tiempoTotal)
     }
 
     return desocupado;
+}
+
+
+void Parquing::anadirQuitarPersonal()
+{
+    string antigua, actual;
+    bool buscar = false;
+    int i = 0;
+
+    do
+    {
+        i = 0;
+
+        do
+        {
+            cout << "Introduce matricula a quitar: ";
+            cin >> antigua;
+        } while (!matriculaReal(antigua));
+        
+        antigua = capitalizeString(antigua);
+
+        while (buscar == false && i < 50)
+        {
+            if(antigua == matriculasPersonal[i])
+                buscar = true;
+
+            i++;
+        }
+
+        if(buscar == false)
+            cout << "Error en encontrar la matricula, inténtelo de nuevo." << endl;
+
+    } while (buscar == false);
+    
+    do
+    {
+        cout << "Perfecto. Introduce matricula actual: ";
+        cin >> actual;
+    } while (!matriculaReal(actual));
+    
+
+    matriculasPersonal[i-1] = actual;
+
+    cout << "Perfecto. Cambio realizado." << endl;
+    
+}
+
+void Parquing::imprimirPersonal()
+{
+    for (int i = 0; i < 50; i++)
+    {
+        cout << i << " " <<matriculasPersonal[i]<< endl;
+    }
+    
 }
