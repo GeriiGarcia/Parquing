@@ -15,12 +15,14 @@ public:
 
     void imprimirPersonal();
 
+    bool personal(string p);
+
    
 
 private:
     vector<Plazas> plazas[1000];
     time_t tiempo;
-    string matriculasPersonal[50] = {"1234ABC", "1234AAA", };
+    string matriculasPersonal[50];
 
 };
 

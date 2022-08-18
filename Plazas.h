@@ -1,6 +1,5 @@
 #include "Vehiculo.h"
 
-
 enum TipoP
 {
     TurismoP,

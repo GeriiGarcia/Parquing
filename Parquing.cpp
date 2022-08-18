@@ -1,7 +1,35 @@
 #include "Parquing.h"
 
-string capitalizeString(string s);
-bool matriculaReal(string m);
+string capitalizeString2(string s)
+{
+    transform(s.begin(), s.end(), s.begin(),
+                 [](unsigned char c){ return toupper(c); });
+    return s;
+}
+bool matriculaReal2(string m)
+{
+     bool real = false;
+
+    string n = m;
+    n.pop_back();
+    n.pop_back();
+    n.pop_back();
+
+    char c = m.back();
+    char b = m.back();
+    char a = m.back();
+
+    if(m.size() == 7)
+    {
+        if(isdigit(n.at(0)) && isdigit(n.at(1)) && isdigit(n.at(2)) && isdigit(n.at(3)) && !isdigit(c) && !isdigit(b) && !isdigit(a))
+            real = true;
+    }
+
+    if(real == false)
+        cout << "Matricula no Válida." << endl;
+
+    return real;
+}
 
 Parquing::Parquing()
 {
@@ -101,15 +129,28 @@ bool Parquing::desocuparPlaza(string mat, int &tiempoTotal)
     {
         if(plazas->at(i).getVehiculo().getMatricula() == mat)
         {
-            //desocupamos plaza
-            desocupado = true;
-            plazas->at(i).getVehiculo().setMatricula("");
-            plazas->at(i).getVehiculo().setTipoV(Vacio);
+            if(plazas->at(i).getTipoP() == RPP)
+            {
+                //desocupamos plaza
+                desocupado = true;
+                plazas->at(i).getVehiculo().setMatricula("");
+                plazas->at(i).getVehiculo().setTipoV(Vacio);
+                tiempoTotal = 0;
+            }
+            else
+            {
+                //desocupamos plaza
+                desocupado = true;
+                plazas->at(i).getVehiculo().setMatricula("");
+                plazas->at(i).getVehiculo().setTipoV(Vacio);
 
-            //cogemos el tiempo actual y se lo restamos al tiempo de entrada de la plaza y lo devolvemos por referencia
-            time_t salida = time(NULL);
-            setTime();
-            tiempoTotal = salida - plazas->at(i).getTiempoP();
+                //cogemos el tiempo actual y se lo restamos al tiempo de entrada de la plaza y lo devolvemos por referencia
+                time_t salida = time(NULL);
+                setTime();
+                tiempoTotal = salida - plazas->at(i).getTiempoP();
+            }
+
+            
             
         }
         i++;
@@ -133,9 +174,9 @@ void Parquing::anadirQuitarPersonal()
         {
             cout << "Introduce matricula a quitar: ";
             cin >> antigua;
-        } while (!matriculaReal(antigua));
+        } while (!matriculaReal2(antigua));
         
-        antigua = capitalizeString(antigua);
+        antigua = capitalizeString2(antigua);
 
         while (buscar == false && i < 50)
         {
@@ -154,8 +195,9 @@ void Parquing::anadirQuitarPersonal()
     {
         cout << "Perfecto. Introduce matricula actual: ";
         cin >> actual;
-    } while (!matriculaReal(actual));
+    } while (!matriculaReal2(actual));
     
+    actual = capitalizeString2(actual);
 
     matriculasPersonal[i-1] = actual;
 
@@ -170,4 +212,32 @@ void Parquing::imprimirPersonal()
         cout << i << " " <<matriculasPersonal[i]<< endl;
     }
     
+}
+
+bool Parquing::personal(string p)
+{
+    bool trobat = false;
+    int i = 0;
+
+    if(matriculaReal2(p))
+    {
+        p = capitalizeString2(p);
+        while(trobat == false && i < 50)
+        {
+            if(matriculasPersonal[i] == p)
+                trobat = true;
+
+            i++;
+        }
+
+        if(trobat == false)
+            cout << "Vehiculo de Personal no encontrado. Vuelva a intentarlo." << endl;
+        else
+        {
+            ocuparPlaza(RP, p);
+        }
+    }
+    
+
+    return trobat;
 }

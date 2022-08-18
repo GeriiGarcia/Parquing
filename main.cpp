@@ -53,14 +53,18 @@ TipoV intoV(int o)
 
 void pago(int tiempo)
 {
-    int deuda = 1;
+    int deuda;
 
-    tiempo = tiempo / 3600;
-
-    deuda = deuda + 0.5 * tiempo;
-
-    cout << "Total ha pagar: " << deuda << "." << endl;
-    
+    if(tiempo == 0)
+        deuda = 0;
+    else
+    {
+        deuda = 1;
+        tiempo = tiempo / 3600;
+        deuda = deuda + 0.5 * tiempo;
+        cout << "Total ha pagar: " << deuda << "." << endl;
+    }
+        
 }
 
 int main()
@@ -103,8 +107,12 @@ int main()
             if(opcionVehiculo == 5)
             {
                 cout <<  "Introduce tu codigo de personal: ";
-                cin >> matric;
-
+                
+                do
+                {
+                    cin >> matric;
+                } while (!P.personal(matric));
+                
                 //Implementar codigo
                 //hacer funcion que ocupe el espacio de esto      bool personal()
                 //a partir de la matricula, comprovar si la matricula esta en el array de strings
@@ -143,7 +151,7 @@ int main()
 
             if(P.desocuparPlaza(matric, tiempoTotal)) 
             {
-                cout << tiempoTotal << endl;
+                //cout << tiempoTotal << endl;
                 pago(tiempoTotal);
                 cout << "Muchas gracias por confiar en nosotros, hasta pronto." << endl << endl;
             }
@@ -154,6 +162,7 @@ int main()
 
         case 4:
             P.anadirQuitarPersonal();
+            //P.imprimirPersonal();
 
             break;
 
