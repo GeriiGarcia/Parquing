@@ -31,11 +31,6 @@ public:
     void setMatricula(string m) {matricula = m;}
     void setTipoV(TipoV t) {tipo = t;}
 
-
-
-
-
-
 private:
     string matricula;
     TipoV tipo;

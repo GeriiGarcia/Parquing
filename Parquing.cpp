@@ -133,25 +133,23 @@ bool Parquing::desocuparPlaza(string mat, int &tiempoTotal)
             {
                 //desocupamos plaza
                 desocupado = true;
-                plazas->at(i).getVehiculo().setMatricula("");
-                plazas->at(i).getVehiculo().setTipoV(Vacio);
+                Vehiculo v("", Vacio);
+                plazas->at(i).setVehiculo(v);
                 tiempoTotal = 0;
             }
             else
             {
                 //desocupamos plaza
                 desocupado = true;
-                plazas->at(i).getVehiculo().setMatricula("");
-                plazas->at(i).getVehiculo().setTipoV(Vacio);
+                Vehiculo v("", Vacio);
+                plazas->at(i).setVehiculo(v);
 
                 //cogemos el tiempo actual y se lo restamos al tiempo de entrada de la plaza y lo devolvemos por referencia
                 time_t salida = time(NULL);
                 setTime();
                 tiempoTotal = salida - plazas->at(i).getTiempoP();
             }
-
-            
-            
+   
         }
         i++;
     }
@@ -240,4 +238,29 @@ bool Parquing::personal(string p)
     
 
     return trobat;
+}
+
+void Parquing::imprimirPlazas()
+{
+    int digits = 1;
+    for (int i = 0; i < 1000; i++)
+    {
+        if(plazas->at(i).getVehiculo().getTipoV()==Vacio)
+            cout << "0";
+        else
+            cout << "X";
+
+        if(digits == 100)
+        {
+            cout << endl;
+            digits = 0;
+        }
+
+        digits++;
+    }
+
+    cout << endl;
+    
+    cout << plazas->at(0).getVehiculo().getMatricula() << endl;
+
 }

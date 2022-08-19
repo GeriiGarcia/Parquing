@@ -14,6 +14,7 @@ public:
     void anadirQuitarPersonal();
 
     void imprimirPersonal();
+    void imprimirPlazas();
 
     bool personal(string p);
 

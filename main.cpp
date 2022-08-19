@@ -78,11 +78,11 @@ int main()
     do
     {
         cout << "Hola, Bienvenido al Parquing de Gerard, que quieres hacer?" << endl;
-        cout << "1- Entrar al parquing" << endl << "2- Salir del parquing"<<endl << "3- Exit" << endl;
+        cout << "1- Entrar al parquing" << endl << "2- Salir del parquing"<<endl << "3- Exit" << endl << "4- Imprimir" << endl;
 
         cin >> opcion;
 
-        while (opcion != 1 && opcion !=2 && opcion !=3 && opcion !=4)
+        while (opcion != 1 && opcion !=2 && opcion !=3 && opcion !=4 && opcion != 4)
         {
             cout << "Opcion no valida" << endl;
             cin >>opcion;
@@ -161,6 +161,9 @@ int main()
             break;
 
         case 4:
+            P.imprimirPlazas();
+            break;
+        case 5:
             P.anadirQuitarPersonal();
             //P.imprimirPersonal();
 
