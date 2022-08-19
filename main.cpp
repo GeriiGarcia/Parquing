@@ -78,11 +78,13 @@ int main()
     do
     {
         cout << "Hola, Bienvenido al Parquing de Gerard, que quieres hacer?" << endl;
-        cout << "1- Entrar al parquing" << endl << "2- Salir del parquing"<<endl << "3- Exit" << endl << "4- Imprimir" << endl;
+        cout << "1- Entrar al parquing" << endl << "2- Salir del parquing"<<endl << "3- Plazas Libres" << endl << "4- Exit" << endl;
 
         cin >> opcion;
 
-        while (opcion != 1 && opcion !=2 && opcion !=3 && opcion !=4 && opcion != 4)
+
+
+        while (opcion != 1 && opcion !=2 && opcion !=3 && opcion !=4 && opcion != 5)
         {
             cout << "Opcion no valida" << endl;
             cin >>opcion;
@@ -90,7 +92,7 @@ int main()
 
         switch(opcion)
         {
-        case 1:    //podria poner cuantas plazas quedaan para cada vehiculo                        void plazasLires(vector plazas);
+        case 1: 
             cout << "¿Qué tipo de coche eres?" << endl << "1- Turismo" << endl << "2- Motocicleta" << endl;
             cout << "3- Vehiculo Familia Numerosa" << endl << "4- Vehiculo Grande" << endl << "5- Reservado a Personal" << endl;
 
@@ -112,12 +114,6 @@ int main()
                 {
                     cin >> matric;
                 } while (!P.personal(matric));
-                
-                //Implementar codigo
-                //hacer funcion que ocupe el espacio de esto      bool personal()
-                //a partir de la matricula, comprovar si la matricula esta en el array de strings
-                //si esta le dejo pasar y devuelve true, si no esta pedir matricula otra vez
-
 
             }
             else
@@ -151,7 +147,6 @@ int main()
 
             if(P.desocuparPlaza(matric, tiempoTotal)) 
             {
-                //cout << tiempoTotal << endl;
                 pago(tiempoTotal);
                 cout << "Muchas gracias por confiar en nosotros, hasta pronto." << endl << endl;
             }
@@ -160,18 +155,17 @@ int main()
 
             break;
 
-        case 4:
+        case 3:
             P.imprimirPlazas();
             break;
         case 5:
             P.anadirQuitarPersonal();
-            //P.imprimirPersonal();
 
             break;
 
         }
 
-    } while (opcion !=3);
+    } while (opcion !=4);
     
     return 0;
 }

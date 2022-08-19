@@ -236,31 +236,32 @@ bool Parquing::personal(string p)
         }
     }
     
-
     return trobat;
 }
 
 void Parquing::imprimirPlazas()
 {
-    int digits = 1;
+    int turismo = 0, moto = 0, vfn = 0, vg = 0, rp = 0;
+
     for (int i = 0; i < 1000; i++)
     {
-        if(plazas->at(i).getVehiculo().getTipoV()==Vacio)
-            cout << "0";
-        else
-            cout << "X";
+        if(plazas->at(i).getVehiculo().getTipoV() == Turismo && plazas->at(i).getVehiculo().getMatricula() != "")
+            turismo++;
+        else if(plazas->at(i).getVehiculo().getTipoV() == Moto && plazas->at(i).getVehiculo().getMatricula() != "")
+            moto++;
+        else if(plazas->at(i).getVehiculo().getTipoV() == VFN && plazas->at(i).getVehiculo().getMatricula() != "")
+            vfn++;
+        else if(plazas->at(i).getVehiculo().getTipoV() == VG && plazas->at(i).getVehiculo().getMatricula() != "")
+            vg++;
+        else if(plazas->at(i).getVehiculo().getTipoV() == RP && plazas->at(i).getVehiculo().getMatricula() != "")
+            rp++;
 
-        if(digits == 100)
-        {
-            cout << endl;
-            digits = 0;
-        }
-
-        digits++;
     }
 
+        cout << endl << "Plazas libres:" << endl << "Turismos: " << 700 - turismo << endl;
+        cout << "Motocicletas: " << 100 - moto << endl << "Vehiculos Para Familias Numerosas: " << 50 - vfn << endl;
+        cout << "Vehiculos Grandes: " <<100 - vg << endl << "Vehiculos Reservados: " << 50 - rp << endl;
+
     cout << endl;
-    
-    cout << plazas->at(0).getVehiculo().getMatricula() << endl;
 
 }
